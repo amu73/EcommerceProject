@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Product Details{% endblock title %} 
+{% block main-content %}
+    {% comment %} <h1>hii</h1> {% endcomment %}
+
+
+            <div class="container">
+                <div class="row flex justify-content-between">
+                    <div class="img2 col-lg-5 mt-5">
+                                <img src="{{product.product_img.url}}" class="image col-xs-6 col-sm-13 col-lg-12 mt-3 text-text-sm-center w-100 h-75" alt="" />
+                    </div>
+                    <div class="prodctdetail col-lg-5">
+                        <h1 style="font-family: Georgia; font-size:50px;">{{product.title}}</h1>
+                        <h5>Rs.{{product.discounted_price}}/-</h5>
+                        {% comment %} <h5>Rs.{{product.selling_price}}/-</h5><br> {% endcomment %}
+                        <small class="fw-light text-decoration-line-through">Rs.{{product.selling_price}}</small>
+
+                        <h4>Product Features:</h4><br>
+                        <ul>
+                            <li>{{product.description}}</li>
+                        </ul>
+                        {% comment %} <h4>Product composition:</h4><br>
+                        <ul>
+                            <li>{{product.composition}}</li>
+                        </ul> {% endcomment %}
+                        
+                        <div class="button row flex" style="font-family:Rajdhani;">
+
+                            <button type="submit" class="d-grid gap-2 btn1 btn btn-danger
+                            p-1 m-1 btn-lg text-decoration-none text-white" >
+                                Add to Cart</button>
+                            <div class="btn btn-dark p-1 m-1 btn-lg " ><a href="#"
+                                class="text-decoration-none text-white">
+                                    Buy Now</a></div>
+                        </div>                   
+                    </div>  
+                </div>
+            </div>
+                    
+
+{% endblock main-content %}
