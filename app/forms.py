@@ -3,6 +3,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from .models import Customer
 
+'''
+Here I have used user creation form which is built-in form in django
+form is in authentication section, just inherit those forms
+'''
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
         max_length=150,

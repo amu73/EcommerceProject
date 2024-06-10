@@ -24,12 +24,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% comment %} condition for display user authentication {% endcomment %}
+            {% if request.user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
-              {% comment %} <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li> {% endcomment %}
+             
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Products
@@ -61,13 +61,13 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown mx-2">
               <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Amrita
+                User
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
               <li><a class="dropdown-item" href="{% url "profile" %}">Profile</a><li>
               <li><a class="dropdown-item" href="#">Orders</a><li>
               <li><a class="dropdown-item" href="#">Change Password</a><li>
-              <li><a class="dropdown-item" href="#">Logout</a><li>
+              <li><a class="dropdown-item" href="{% url "logout" %}">Logout</a><li>
 
               </ul>
             </li>
@@ -77,12 +77,14 @@
             <li class="nav-item mx-2">
               <a href="#" class="nav-link text-white">Wishlist </a>
             </li>
+            {% else %}
             <li class="nav-item mx-2">
               <a href="{% url "login" %}" class="nav-link text-white">Login </a>
             </li>
             <li class="nav-item mx-2">
               <a href="{% url "register" %}" class="nav-link text-white">Register </a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </nav>

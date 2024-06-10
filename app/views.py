@@ -55,26 +55,6 @@ class CustomerRegistrationView(View):
             messages.warning(request,"Invalid input data")
         return render(request, 'app/register.html', locals())
 
-# class LoginForm(AuthenticationForm):
-
-# def login_view(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('home')
-#     else:
-#         form = AuthenticationForm()
-#     return render(request, 'app/login.html', {'form': form})
-
-def logout_view(request):
-    logout(request)
-    return redirect('login')
-
 class ProfileView(View):
     def get(self,request):
         form = CustomerProfileForm()
@@ -103,8 +83,26 @@ def address(request):
 
 class UpdateAddress(View):
     def get(self,request,pk):
-        form = CustomerProfileForm()
+        # to see the previous data
+        add = Customer.objects.get(pk=pk)
+        # data added to the input field
+        form = CustomerProfileForm(instance=add)
         return render(request,'app/updateAddress.html',locals())
     def post(self,request,pk):
         form=CustomerProfileForm(request.POST)
-        return render(request,'app/updateAddress.html',locals())
+        
+        if form.is_valid():
+            add = Customer.objects.get(pk=pk)
+            add.name = form.cleaned_data['name'] 
+            add.locality = form.cleaned_data['locality'] 
+            add.city = form.cleaned_data['city'] 
+            add.mobile = form.cleaned_data['mobile'] 
+            add.state = form.cleaned_data['state'] 
+            add.zipcode = form.cleaned_data['zipcode'] 
+            add.save()
+            messages.success(request, "Address updated successfully")
+          
+        else:
+            messages.warning(request,"Invalid input data")
+        return redirect("address")
+        
